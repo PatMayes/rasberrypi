@@ -3,15 +3,14 @@
 ## Table of Contents
  - Overview
  - [Assembling a Raspberry Pi](prep/README.md)
-    - [Operating System](linux/README.md)
-    - [Toggle Raspberry Pi led light](linux/embed/README.md)
-    - [Autoboot Services](linux/embed/sysd/README.md)
-    - [Adding TightVNC](linux/app/README.md)
+ - [Operating System](linux/README.md)
+  - [Toggle Raspberry Pi led light](linux/embed/README.md)
+  - [Autoboot Services](linux/embed/sysd/README.md)
  - [Database (MySQL)](db/README.md)</br>
    - [MySQL Timezones](db/MYSQLTZ.md)
  - [Getting Started with Node](web/README.md)
-   - [Exploring HTTP Status codes](web/HTTP.md)
- - [Angular Setup](/web/ux/README.md)
+   - [Exploring HTTP](web/HTTP.md)
+ - [Building API (Node)](web/api/js/src/iotapi/README.md)
  - [Cryptography](web/CRYPTO.md)
  - Summary
 
