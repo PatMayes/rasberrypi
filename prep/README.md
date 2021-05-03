@@ -13,7 +13,7 @@
 
 ## Overview
 
-In this tutorial, we are going to learn how to construct a Raspberry Pi for testing. Being able to put together and navigate through a Raspberry Pi will set you on the path for building a new computer. This process take very little time but if you are a new user we will go over some of the contents.
+In this tutorial, we are going to learn how to construct a raspberry pi for testing. Being able to put together and navigate through a raspberry pi will set you on the path for building a new computer. This process take very little time but if you are a new user we will go over some of the contents.
 
 <div id='what-is-a-raspberry-pi'>
 
@@ -73,7 +73,7 @@ Before continuing below, you will also need to know how to flash a pi operating 
 There is also a more [advanced version](../prep/README2.md) of cloning a pi image onto a drive with minimal tools if you are using Linux and would like a challenge. However for beginners, I would advise using the tools at the top.
 
 
-## [Continue to Operating System Linux Setup](../linux/README.md)
+## [Continue to Operating System Linux Setup](linux/README.md)
 
 <details><summary>Tutorial List</summary>
 
@@ -86,9 +86,9 @@ There is also a more [advanced version](../prep/README2.md) of cloning a pi imag
 
 ### Linux - WSl setup
 
-[Operating System (Linux)](../linux/README.md)<br>
-[Toggle Raspberry Pi led light](../linux/embed/README.md)<br>
-[Autoboot Services](../linux/embed/sysd/README.md)<br>
+[Operating System (Linux)](/linux/README.md)<br>
+[Toggle Raspberry Pi led light](linux/embed/README.md)<br>
+[Autoboot Services](linux/embed/sysd/README.md)<br>
 
 
 ---
@@ -105,27 +105,27 @@ There is also a more [advanced version](../prep/README2.md) of cloning a pi imag
 
 ### Web
 
-[Getting Started with Node](../web/README.md)<br>
-[(Part 1) Web API (Node)](../web/api/js/src/iotapi/README.md)<br>
-[(Part 2) Web API (Node)](../web/api/js/src/iotapi/README2.md)<br>
-[(Part 3) Web API (Node)](../web/api/js/src/iotapi/README3.md)<br>
-[(Part 4) Web API (Node)](../web/api/js/src/iotapi/README4.md)<br>
-[(Part 5) Web API (Node)](../web/api/js/src/iotapi/README5.md)<br>
+[Getting Started with Node](web/README.md)<br>
+[(Part 1) Web API (Node)](web/api/js/src/iotapi/README.md)<br>
+[(Part 2) Web API (Node)](web/api/js/src/iotapi/README2.md)<br>
+[(Part 3) Web API (Node)](web/api/js/src/iotapi/README3.md)<br>
+[(Part 4) Web API (Node)](web/api/js/src/iotapi/README4.md)<br>
+[(Part 5) Web API (Node)](web/api/js/src/iotapi/README5.md)<br>
 
 ---
 
 ### UX
 
-[Angular (Web Framework Setup)](../web/ux/README.md)<br>
-[Angular (Web Framework) (Part 1)](../web/ux/README2.md)<br>
-[Angular (Web Framework) (Part 2)](../web/ux/README3.md)<br>
-[Angular (Web Framework) (Part 3)](../web/ux/README4.md)<br>
+[Angular (Web Framework Setup)](web/ux/README.md)<br>
+[Angular (Web Framework) (Part 1)](web/ux/README2.md)<br>
+[Angular (Web Framework) (Part 2)](web/ux/README3.md)<br>
+[Angular (Web Framework) (Part 3)](web/ux/README4.md)<br>
 
 ---
 
 ### API
 
-[Installing MySQL Connector for Python](../web/api/py/README.md)
+[Installing MySQL Connector for Python](web/api/py/README.md)
 
 </details>
 

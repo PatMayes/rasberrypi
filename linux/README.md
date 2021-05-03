@@ -125,7 +125,7 @@ If you are on a a Windows client, when you add the `ssh` file, you will need to 
 
 <details><summary>Click here if you plan on accessing your Raspberry Pi via WiFi</summary>
 
-Just like how you added the `ssh` file to access the Raspberry Pi without a monitor, you will also need to add another file to the boot startup called `wpa_supplicant.conf`. This will connect you to your WiFi network. Create the new file in the `boot` partition and add the following into the file:
+Just like how you added the `ssh` file to access the Raspberry Pi without a monitor, you will also need to add another file to the boot startup called `wpa_supplicant.conf`. This will connect yo your WiFi network. Create the new file in the `boot` partition and add the following into the file:
 
 ```
 country=US
@@ -192,10 +192,10 @@ sudo apt install net-tools
 
 ### Logging into the Raspberry Pi.
 
-Once you discover the mac and IP address of your Raspberry Pi you are ready to connect to it. Issue the ssh command below to establish a new connection. Remember to replace the `your-raspberrypi-ip-address` with your actualy Raspberry Pi address.
+Once you discover the mac and IP address of your Raspberry Pi you are ready to connect to it. Issue the ssh command below to establish a new connection. 
 
 ```console
-ssh pi@your-raspberrypi-ip-address
+ssh pi@raspberrypi-ip
 ```
 
 When prompted enter the Raspberry Pi's default password `raspberry`.
@@ -226,7 +226,7 @@ sudo apt upgrade
 
 `Nano` is just one of many editors available to you on Linux that would be just fine for the tutorial. A personal recommendation is `Vim`, which is a bit difficult to learn at first due to its un-intuitiveness, but powerful once you get used to it. However, for the purpose of these tutorials, you can just use `nano` for now. 
 
-<b>Note:</b> If you would like to learn how to use Vim's general navigation and basic searching, you can [follow this tutorial](https://cpht.gitlab.io/docs/wiki/docs/docVi/)
+<b>Note:</b> If you would like to learn how to use Vim's general navigation and basic searching, you can [follow this tutorial](https://www.cpht.gitlab.io/docs/wiki/docs/docVi)
 
 The majority of this tutorial involves command line access to the Raspberry Pi to get applications setup. The source code provided in the simpler examples can be managed using a simple editor as described above. Larger code blocks in subsequent tutorials require you to upload files to the Raspberry Pi from your local machine. Using this workflow will accelerate the development process.
 
@@ -235,55 +235,36 @@ The majority of this tutorial involves command line access to the Raspberry Pi t
 
 ## Introduction to Secure Copy (SCP)
 
-Editing files on the Raspberry Pi using `Vim` or `Nano` can be inefficient. Your raspberry pi can only power so much when you have it in operation. For example, if you have it serving a website and the database is active, the processing power decreases and causes overheating.
+Editing files on the Raspberry Pi using `Vim` or `Nano` can be inefficient. So for starting out, we will move our source editing to our local machine, also called the host machine,  and copy files to the Raspberry Pi for testing.  
 
-So for starting out on a couple of lessons, we will move our source editing to our local machine, also called the host machine,  and copy files to the Raspberry Pi for testing. Using this technique will also deliver the chance of seeing how a machine can communicate with another when transferring data. 
+To automate the transfer of files in this tutorial we will be using `SCP`, which is short for Secure Copy Protocol.  `SCP` is used to securely copy files between a local client and remote host or between two remote hosts. `SCP` uses `ssh` or Secure Shell Protocol to transfer files. We can demonstate this on your machine.
 
-To automate the transfer of files in this tutorial we will be using `SCP`, which is short for Secure Copy Protocol.  The `scp` command is used to securely copy files between a local client and remote host or between two remote hosts. `SCP` uses `ssh` or Secure Shell Protocol to transfer files. We can demonstate this on your machine by moving over a file you will create on your host machine.
+- On your terminal, make sure you are on your machine. If you are still logged into your pi, close the connection by typing in the terminal `exit`.
 
-- On one terminal, make sure you are logged into your machine and at the home directory. If you are not logged in, use the command `sudo ssh pi@your-raspberry-pi-ip-address` to get logged in. Remember to replace `your-raspberry-pi-ip-address` with you actual raspberry pi ip address. 
-- Run the command `pwd` to see if you are at the home directoy, which should be called `/home/pi`.
+<b>Note</b>: If you are ever curious where you are on your terminal, you can type `pwd` to show the current directory you are at or look at the username on your terminal. The default terminal name for a raspberry pi is `pi@raspberry`.
 
-```console
-pi@raspberrypi:~ $ pwd
-/home/pi
-```
-- On your terminal connected to your host machine, not the raspberry pi, create a new file using the `touch` command. For example, I created a new file `touch droids.dat` on my host machine. I also created another called `hello.txt` just to be sure.
+- On your host machine, not the raspberry pi, create a new file using the `touch` command. For example, I created a new file `touch droids.dat` on my host machine.
 - Run the command `ls` to make sure the file is listed. 
-
-```console
-Tonys-iMac:~ ironman$ touch droids.dat hello.txt
-Tonys-iMac:~ ironman$ ls
-Applications		Library			VirtualBox VMs
-Desktop			Movies			corporate-website	sictcweb
-Documents		Music			droids.dat		testsite
-Downloads		Pictures		hello.txt		unison-web
-ILP			Public			homebrew		zpltemplatesetup
-Tonys-iMac:~ ironman$ 
-```
-- On your host temrinal, not your raspberry pi terminal, copy over one or all the files created in the step above using `scp`. Use `scp filename pi@your-raspberry-pi-ip-address:`. Remember to replace `filename` with the one you named and `your-raspberry-pi-ip-address:` With your correct raspberry pi ip adddress.
-
-<b>Note</b>: Also make sure to add the `:` on the end of the command. Otherwise, the file(s) will never copy over and you will not see the results. This will just result in an empty command
 
 Below is an example of transferring a single file to the Raspberry Pi. Be sure to replace `raspberrypi-ip` with your Raspberry Pi's IP address.
 
 ```console
-Tonys-iMac:~ ironman$ scp droids.dat hello.txt pi@raspberry-pi-ip-address:
-pi@raspberry-pi-ip-address's password: 
-droids.dat                                                                 100%    0     0.0KB/s   00:00    
-hello.txt                                                                  100%    0     0.0KB/s   00:00    
-Tonys-iMac:~ ironman$ 
+scp droids.dat pi@raspberrypi-ip:~/
 ```
 
-The command copies the `droids.dat` and `hello.txt` file you created to the Raspberry Pi. We hit the Raspberry Pi, inidcated by the `pi@your-raspberry-pi-ip-address` and drop it in the home directory is indicated by the symbol `:`. Then, `scp` will prompt you for the Raspberry Pi's password before beginning the transfer. 
+The command copies the `droids.dat` file you created to the home directory on the Raspberry Pi. The home directory is indicated by the symbol or shortcut `~/`. Then, `scp` will prompt you for the Raspberry Pi's password before beginning the transfer. 
 
-On the other terminal you have open and connected to your Raspberry Pi, you can see the results by running `ls` on your Raspberry Pi terminal.
+You can confirm the transfer on the Raspberry Pi by issuing the `ls -al` command from the 
+Raspberry Pi terminal. 
 
+- (optional) Open up a new terminal on your screen. This is so you can see the terminal that's working on your host machine and the other is logged in working on your raspberry pi.
+- Log into your pi.
+- Navigate to your home directory on the Raspberry Pi. If you are logging in, you should be at the home directory. 
+- Go ahead and type the command below.
 ```console
-pi@raspberrypi:~ $ ls
-Bookshelf  Desktop  Documents  Downloads  droids.dat  hello.txt  Music  Pictures  Public  Templates  Videos
-pi@raspberrypi:~ $ 
+ls -al
 ```
+You should see a directory listing and the ```droids.data``` file.
 
 <div id='macspoofing'/>
 
@@ -291,12 +272,10 @@ pi@raspberrypi:~ $
 There are times when you will want to make it more convenient to find your Raspberry Pi on the network. This tutorial teaches you how to change the last three octets of the MAC address on the Raspberry Pi.
 
 If you are not already, log into your Raspberry Pi check the contents of the `/boot/cmdline.txt` file by issuing the following command. 
-
 ```console
 cat /boot/cmdline.txt
 ```
 You should see something like this:
-
 ```console
 console=serial0,115200 console=tty1 root=PARTUUID=4d59a030-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet splash plymouth.ignore-serial-consoles
 ```
@@ -342,57 +321,57 @@ Once you see your raspberry pi online, repeat the `arp` command above to discove
  - https://en.wikipedia.org/wiki/GNU_nano
  - https://en.wikipedia.org/wiki/Vim_(text_editor)
 
-## Continue to [Database: Part 1](../db/README.md)
+## Continue to [Database: Part 1](db/README.md)
 
 <details><summary>Tutorial List</summary>
 
 ### Prep
 
-[Raspberry Pi Prep](../prep/README.md)<br>
-[(Bonus) Flashing OS image to SD card: Linux Version](../prep/README2.md)<br>
+[Raspberry Pi Prep](prep/README.md)<br>
+[(Bonus) Flashing OS image to SD card: Linux Version](prep/README2.md)<br>
 
 ---
 
 ### Linux - WSl setup
 
 [Operating System (Linux)](../linux/README.md)<br>
-[Toggle Raspberry Pi led light](../linux/embed/README.md)<br>
-[Autoboot Services](../linux/embed/sysd/README.md)<br>
+[Toggle Raspberry Pi led light](linux/embed/README.md)<br>
+[Autoboot Services](linux/embed/sysd/README.md)<br>
 
 ---
 
 ### Database
 
-[(Part 1) Database (MySQL)](../db/README.md)<br>
-[(Part 2) Tables, Queries, and SQL](../db/README2.md)<br>
-[(Part 3) Working with Relations](../db/README3.md)<br>
-[(Part 4) Putting it all together](../db/README4.md)<br>
-[(Extras) Setting MySQL Timezone on Raspberry Pi](../db/MYSQLTZ.md)<br>
+[(Part 1) Database (MySQL)](db/README.md)<br>
+[(Part 2) Tables, Queries, and SQL](db/README2.md)<br>
+[(Part 3) Working with Relations](db/README3.md)<br>
+[(Part 4) Putting it all together](db/README4.md)<br>
+[(Extras) Setting MySQL Timezone on Raspberry Pi](db/MYSQLTZ.md)<br>
 
 ---
 
 ### Web
 
-[Getting Started with Node](../web/README.md)<br>
-[(Part 1) Web API (Node)](../web/api/js/src/iotapi/README.md)<br>
-[(Part 2) Web API (Node)](../web/api/js/src/iotapi/README2.md)<br>
-[(Part 3) Web API (Node)](../web/api/js/src/iotapi/README3.md)<br>
-[(Part 4) Web API (Node)](../web/api/js/src/iotapi/README4.md)<br>
-[(Part 5) Web API (Node)](../web/api/js/src/iotapi/README5.md)<br>
+[Getting Started with Node](web/README.md)<br>
+[(Part 1) Web API (Node)](web/api/js/src/iotapi/README.md)<br>
+[(Part 2) Web API (Node)](web/api/js/src/iotapi/README2.md)<br>
+[(Part 3) Web API (Node)](web/api/js/src/iotapi/README3.md)<br>
+[(Part 4) Web API (Node)](web/api/js/src/iotapi/README4.md)<br>
+[(Part 5) Web API (Node)](web/api/js/src/iotapi/README5.md)<br>
 
 ---
 
 ### UX
 
-[Angular (Web Framework Setup)](../web/ux/README.md)<br>
-[Angular (Web Framework) (Part 1)](../web/ux/README2.md)<br>
-[Angular (Web Framework) (Part 2)](../web/ux/README3.md)<br>
-[Angular (Web Framework) (Part 3)](../web/ux/README4.md)<br>
+[Angular (Web Framework Setup)](web/ux/README.md)<br>
+[Angular (Web Framework) (Part 1)](web/ux/README2.md)<br>
+[Angular (Web Framework) (Part 2)](web/ux/README3.md)<br>
+[Angular (Web Framework) (Part 3)](web/ux/README4.md)<br>
 
 ---
 
 ### API
 
-[Installing MySQL Connector for Python](../web/api/py/README.md)
+[Installing MySQL Connector for Python](web/api/py/README.md)
 
 </details>
